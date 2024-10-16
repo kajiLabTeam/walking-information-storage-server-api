@@ -1,0 +1,1 @@
+# walking-information-trajectories-api
