@@ -11,3 +11,6 @@ logs:
 
 db:
 	docker exec -it $(DB_HOST) psql -U $(DB_USER) -d $(DB_NAME)
+
+go:
+	docker exec -it $(GO_HOST) /bin/sh
