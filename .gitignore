@@ -1,5 +1,5 @@
 # postgres
-docker/postgres/data/
+docker/db/data/
 
 # env
 .env
