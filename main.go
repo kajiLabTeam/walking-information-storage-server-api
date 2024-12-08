@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/kajiLabTeam/walking-information-storage-server-api/server/presentation/controllers"
+	"github.com/kajiLabTeam/walking-information-storage-server-api/app/presentation/controllers"
 )
 
 func main() {

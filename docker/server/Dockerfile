@@ -1,8 +1,7 @@
 FROM golang:1.23.3
 
-WORKDIR /server
+WORKDIR /app
 
-COPY /server /server
-COPY /.env /server/.env
+COPY ./ /app
 
 CMD ["go", "run", "main.go"]

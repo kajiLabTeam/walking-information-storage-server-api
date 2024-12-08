@@ -1,6 +1,6 @@
 services:
   db:
-    container_name: walking-information-storage-server-api-db
+    container_name: ${DB_HOST}
     build: 
       context: .
       dockerfile: ./docker/db/Dockerfile
@@ -14,12 +14,12 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
 
   server:
-    container_name: walking-information-storage-server-api-server
+    container_name: ${SERVER_HOST}
     build:
       context: .
       dockerfile: ./docker/server/Dockerfile
     volumes:
-      - ./server:/server
+      - .:/app
     stdin_open: true
     ports:
       - 8080:8080
