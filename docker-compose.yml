@@ -19,7 +19,7 @@ services:
       context: .
       dockerfile: ./docker/server/Dockerfile
     volumes:
-      - ./server:/server
+      - .:/app
     stdin_open: true
     ports:
       - 8080:8080
