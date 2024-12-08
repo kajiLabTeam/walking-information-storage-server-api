@@ -8,7 +8,7 @@ type HealthCheckResponse struct {
 	Status string `json:"status"`
 }
 
-func HealthCheckHandler(r *gin.Engine) {
+func HealthCheckController(r *gin.Engine) {
 	r.GET("/health", func(c *gin.Context) {
 		res := HealthCheckResponse{
 			Status: "OK",
