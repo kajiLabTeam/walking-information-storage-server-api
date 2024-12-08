@@ -1,6 +1,6 @@
-# `server`
+# `app`
 
-`server` 配下は次のような構成になっています。
+`app` 配下は次のような構成になっています。
 
 ```
 .
@@ -10,6 +10,8 @@
 │   └── services
 │       └── xxx_service.go
 ├── config
+│   └── services
+│       └── xxx.go
 ├── infrastructure
 │   ├── dto
 │   |    └── infrastructure_dto.go
@@ -23,8 +25,8 @@
 │   |    └── presentation_dto.go
 │   └── controllers
 │   　   └── xxx_controller.go
-├── utils
-└── main.go
+└── utils
+    └── xxx.go
 ```
 
 ### `application`
