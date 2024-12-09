@@ -1,0 +1,69 @@
+{
+	"floor_map_image": {
+		"URL": "署名付きURL"
+	},
+	"estimation_trajectories": [
+		{
+			"estimation_trajectories_id": 1,
+			"estimation_position": [
+				{
+					"id": 1,
+					"x": 1111,
+					"y": 1111
+				},
+				{
+					"id": 2,
+					"x": 1111,
+					"y": 1111
+				}
+			]
+		},
+		{
+			"estimation_trajectories_id": 2,
+			"estimation_position": [
+				{
+					"id": 3,
+					"x": 1111,
+					"y": 1111
+				},
+				{
+					"id": 4,
+					"x": 1111,
+					"y": 1111
+				}
+			]
+		}
+	],
+	"correct_trajectories": [
+		{
+			"correct_trajectories_id": 1,
+			"correct_position": [
+				{
+					"id": 1,
+					"x": 1111,
+					"y": 1111
+				},
+				{
+					"id": 2,
+					"x": 1111,
+					"y": 1111
+				}
+			]
+		},
+		{
+			"correct_trajectories_id": 2,
+			"correct_position": [
+				{
+					"id": 3,
+					"x": 1111,
+					"y": 1111
+				},
+				{
+					"id": 4,
+					"x": 1111,
+					"y": 1111
+				}
+			]
+		}
+	]
+}
