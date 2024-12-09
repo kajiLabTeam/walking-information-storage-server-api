@@ -17,5 +17,7 @@ func main() {
 
 	// 以下にコントローラーを追加
 	controllers.HealthCheckController(r)
+	controllers.GetTrajectoriesController(r)
+
 	r.Run(":8080")
 }
