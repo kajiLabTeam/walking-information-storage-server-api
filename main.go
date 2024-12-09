@@ -16,7 +16,6 @@ func main() {
 	r := gin.Default()
 
 	// 以下にコントローラーを追加
-	controllers.HealthCheckHandler(r)
-
+	controllers.HealthCheckController(r)
 	r.Run(":8080")
 }
