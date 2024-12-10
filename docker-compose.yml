@@ -14,8 +14,8 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       
   golang:
-    container_name: ${GO_HOST}
-    hostname: ${GO_ADDRESS}
+    container_name: ${GO_CONTAINER_NAME}
+    hostname: ${GO_HOST}
     tty: true
     build: 
       context: .
