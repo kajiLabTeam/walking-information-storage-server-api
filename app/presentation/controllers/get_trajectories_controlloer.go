@@ -18,9 +18,9 @@ type EstimationTrajectories struct {
 	EstimationPosition
 }
 type EstimationPosition struct {
-	ID int `json:"id"`
-	X  int `json:"x"`
-	Y  int `json:"y"`
+	ID int     `json:"id"`
+	X  float32 `json:"x"`
+	Y  float32 `json:"y"`
 }
 
 func GetTrajectoriesController(r *gin.Engine) {
@@ -30,7 +30,7 @@ func GetTrajectoriesController(r *gin.Engine) {
 			EstimationTrajectories: EstimationTrajectories{
 				EstimationTrajectoriesID: 123,
 				EstimationPosition: EstimationPosition{
-					ID: 1, X: 3, Y: 2,
+					ID: 1, X: 32.4455, Y: 153.34555,
 				},
 			},
 		}
