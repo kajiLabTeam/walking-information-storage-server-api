@@ -14,12 +14,23 @@ import (
 type GetTrajectoriesResponse struct {
 	FloorMapImage          string                   `json:"floor_map_image"`
 	EstimationTrajectories []EstimationTrajectories `json:"estimation_trajectories"`
+	CorrectTrajectories    []CorrectTrajectories    `json:"correct_trajectories"`
 }
 type EstimationTrajectories struct {
-	EstimationTrajectoriesID int `json:"estimation_trajectories_id"`
-	EstimationPosition       []EstimationPosition
+	EstimationTrajectoriesID int                  `json:"estimation_trajectories_id"`
+	EstimationPosition       []EstimationPosition `json:"estimation_position"`
 }
+
 type EstimationPosition struct {
+	ID int     `json:"id"`
+	X  float32 `json:"x"`
+	Y  float32 `json:"y"`
+}
+type CorrectTrajectories struct {
+	CorrectTrajectoriesID int               `json:"correct_trajectories_id"`
+	CorrectPosition       []CorrectPosition `json:"correct_position"`
+}
+type CorrectPosition struct {
 	ID int     `json:"id"`
 	X  float32 `json:"x"`
 	Y  float32 `json:"y"`
@@ -69,10 +80,39 @@ func GetTrajectoriesController(r *gin.Engine) {
 				},
 			},
 		}
+
+		correctTrajectories := []CorrectTrajectories{
+			{
+				CorrectTrajectoriesID: 123,
+				CorrectPosition: []CorrectPosition{
+					{
+						ID: 1, X: 32.4455, Y: 153.34555,
+					},
+					{
+
+						ID: 1, X: 32.4455, Y: 153.34555,
+					},
+				},
+			},
+			{
+				CorrectTrajectoriesID: 123,
+				CorrectPosition: []CorrectPosition{
+					{
+						ID: 1, X: 32.4455, Y: 153.34555,
+					},
+					{
+
+						ID: 1, X: 32.4455, Y: 153.34555,
+					},
+				},
+			},
+		}
+
 		res := GetTrajectoriesResponse{
 
 			FloorMapImage:          "gsgsgfs12144",
 			EstimationTrajectories: estimationTrajectories,
+			CorrectTrajectories:    correctTrajectories,
 		}
 		c.JSON(200, res)
 
