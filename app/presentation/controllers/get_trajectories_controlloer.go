@@ -10,8 +10,8 @@ import (
 //EstimationPosition(推定座標)は２重配列
 
 type GetTrajectoriesResponse struct {
-	FloorMapImage string `json:"floor_map_image"`
-	EstimationTrajectories
+	FloorMapImage          string                 `json:"floor_map_image"`
+	EstimationTrajectories EstimationTrajectories `json:"estimation_trajectories"`
 }
 type EstimationTrajectories struct {
 	EstimationTrajectoriesID int `json:"estimation_trajectories_id"`
@@ -25,14 +25,15 @@ type EstimationPosition struct {
 
 func GetTrajectoriesController(r *gin.Engine) {
 	r.GET("/api", func(c *gin.Context) {
-		res := GetTrajectoriesResponse{
-			FloorMapImage: "gsgsgfs12144",
-			EstimationTrajectories: EstimationTrajectories{
-				EstimationTrajectoriesID: 123,
-				EstimationPosition: EstimationPosition{
-					ID: 1, X: 32.4455, Y: 153.34555,
-				},
+		estimationTrajectories := EstimationTrajectories{
+			EstimationTrajectoriesID: 123,
+			EstimationPosition: EstimationPosition{
+				ID: 1, X: 32.4455, Y: 153.34555,
 			},
+		}
+		res := GetTrajectoriesResponse{
+			FloorMapImage:          "gsgsgfs12144",
+			EstimationTrajectories: estimationTrajectories,
 		}
 		c.JSON(200, res)
 
