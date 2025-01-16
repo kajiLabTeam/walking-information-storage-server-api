@@ -3,6 +3,9 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+
+	//"github.com/kajiLabTeam/walking-information-storage-server-api/app/infrastructure"
+	"github.com/kajiLabTeam/walking-information-storage-server-api/app/infrastructure"
 	"github.com/kajiLabTeam/walking-information-storage-server-api/app/presentation/controllers"
 )
 
@@ -15,7 +18,11 @@ func main() {
 
 	r := gin.Default()
 
+	infrastructure.ConnectionDB()
+
 	// 以下にコントローラーを追加
 	controllers.HealthCheckController(r)
+	controllers.GetTrajectoriesController(r)
+
 	r.Run(":8080")
 }
