@@ -18,10 +18,6 @@ func ConnectionDB() (*sql.DB, error) {
 	user := os.Getenv("DB_USER")
 	password := os.Getenv("DB_PASSWORD")
 
-	// fmt.Println(host)
-	// fmt.Println(port)
-	// fmt.Println(name)
-	// fmt.Println(user)
 	fmt.Println(password)
 
 	connStr := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable host=%s port=%s", user, password, name, host, port)
