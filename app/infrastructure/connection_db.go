@@ -9,10 +9,9 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// WalkingInformation テーブルのデータ構造体
-type WalkingInformation struct {
-	ID           string `db:"id"`
-	PedestrianID string `db:"pedestrian_id"`
+// trajectories  テーブルのデータ構造体
+type Trajectories struct {
+	ID string `db:"id"`
 }
 
 func ConnectionDB() (*sql.DB, error) {
@@ -40,26 +39,23 @@ func ConnectionDB() (*sql.DB, error) {
 	}
 	fmt.Println("DB接続成功")
 
-	// walking_information テーブルのデータ取得
-	rows, err := db.Query("SELECT id, pedestrian_id FROM walking_information")
-	// fmt.Println(rows)
+	// trajectories テーブルのtrajectoriesID のデータ取得
+	rows, err := db.Query("SELECT id  FROM trajectories WHERE floor_id = '01F8VYXK67BGC1F9RP1E4S9YTV'")
 
 	if err != nil {
 		return nil, fmt.Errorf("クエリ実行エラー %w", err)
 	}
 	defer rows.Close()
 
-	fmt.Println(rows)
 	// データ取得と出力
 	for rows.Next() {
 
-		fmt.Println("こんにゃく")
-		var wi WalkingInformation
-		if err := rows.Scan(&wi.ID, &wi.PedestrianID); err != nil {
+		var trajectory Trajectories
+		if err := rows.Scan(&trajectory.ID); err != nil {
 			return nil, fmt.Errorf("データスキャンエラー: %w", err)
 		}
-		// fmt.Println("エラーは出てニアよ")
-		fmt.Printf("ID: %s,PedestrianID :%s\n", wi.ID, wi.PedestrianID)
+
+		fmt.Printf("trajectoryID: %s\n", trajectory.ID)
 	}
 	fmt.Println(rows)
 
