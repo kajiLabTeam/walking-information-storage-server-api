@@ -26,7 +26,6 @@ func ConnectionDB() (*sql.DB, error) {
 
 	// PostgreSQL 接続文字列の作成
 	connStr := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable host=%s port=%s", user, password, name, host, port)
-	fmt.Println(connStr)
 
 	//データベースと接続
 	db, err := sql.Open("postgres", connStr)
@@ -41,18 +40,18 @@ func ConnectionDB() (*sql.DB, error) {
 	fmt.Println("DB接続成功")
 
 	//floor_id(フロアID)を元に軌跡ID(trajectry_id)を取得
-	trajectoryID, err := repository.GetTrajectoryIDByFloorID(db, "01F8VYXK67BGC1F9RP1E4S9YTV")
+	trajectory, err := repository.GetTrajectoryIDByFloorID(db, "01F8VYXK67BGC1F9RP1E4S9YTV")
 	if err != nil {
 		return nil, fmt.Errorf("軌跡IDの取得エラー: %w", err)
 	}
 
 	//軌跡ID(trajectry_id)に紐付いた推定座標(estimated_positions)/正解座標(correct_positions)を取得
-	estimatedPositions, err := repository.GetEstimatedPositionsByTrajectoryID(db, trajectoryID)
+	estimatedPositions, err := repository.GetEstimatedPositionsByTrajectoryID(db, trajectory.ID)
 	if err != nil {
 		return nil, fmt.Errorf("推定座標の取得エラー: %w", err)
 	}
 
-	correctPositions, err := repository.GetCorrectPositionsByTrajectoryID(db, trajectoryID)
+	correctPositions, err := repository.GetCorrectPositionsByTrajectoryID(db, trajectory.ID)
 	if err != nil {
 		return nil, fmt.Errorf("正解座標の取得エラー: %w", err)
 	}
