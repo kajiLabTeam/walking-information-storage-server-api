@@ -46,6 +46,9 @@ func ConnectionDB() (*sql.DB, error) {
 	//軌跡ID(trajectry_id)に紐付いた推定座標(estimated_positions)を取得
 	repository.GetEstimatedPositionsByTrajectoryID(db, "01JET1DV4WJ2EP78B8HAKK5SP0")
 
+	//軌跡ID(trajectry_id)に紐付いた正解座標(correct_positions)を取得
+	repository.GeCorrectPositionsByTrajectoryID(db, "01JET1DV4WJ2EP78B8HAKK5SP0")
+
 	if err := db.Close(); err != nil {
 		log.Printf("データベースのクローズに失敗: %v", err)
 	}
