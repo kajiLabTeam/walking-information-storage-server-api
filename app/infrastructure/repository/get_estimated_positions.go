@@ -16,7 +16,7 @@ type EstimatedPositions struct {
 	TrajectoryID string `db:"trajectory_id"`
 }
 
-func GetEstimationPositionByTrajectoryID(db *sql.DB, id string) (EstimatedPositions, error) {
+func GetEstimatedPositionsByTrajectoryID(db *sql.DB, id string) (EstimatedPositions, error) {
 
 	// EstimatedPositionsテーブルの id,x,y,created_at,trajectory_idのデータ取得
 	rows, err := db.Query("SELECT id,x,y,created_at,trajectory_id FROM estimated_positions WHERE trajectory_id = '01JET1DV4WJ2EP78B8HAKK5SP0'")
@@ -34,7 +34,6 @@ func GetEstimationPositionByTrajectoryID(db *sql.DB, id string) (EstimatedPositi
 
 		fmt.Printf("estimated_position:ID %s,x %d,y %d ,CreatedAt %s,TrajectoryID %s \n", estimatedPosition.ID, estimatedPosition.X, estimatedPosition.Y, estimatedPosition.CreatedAt, estimatedPosition.TrajectoryID)
 	}
-	fmt.Println(rows)
 
 	return EstimatedPositions{}, nil
 
