@@ -21,17 +21,16 @@ func GetTrajectoryIDByFloorID(db *sql.DB, id string) (Trajectories, error) {
 	}
 	defer rows.Close()
 
+	var trajectory Trajectories
 	// データ取得と出力
 	for rows.Next() {
-		var trajectory Trajectories
+
 		if err := rows.Scan(&trajectory.ID); err != nil {
 			return Trajectories{}, fmt.Errorf("データスキャンエラー: %w", err)
 		}
 
-		fmt.Printf("trajectoryID: %s\n\n", trajectory.ID)
 	}
-	fmt.Println(rows)
 
-	return Trajectories{}, nil
+	return Trajectories{ID: trajectory.ID}, nil
 
 }
