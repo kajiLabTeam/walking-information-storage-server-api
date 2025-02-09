@@ -6,8 +6,14 @@ import (
 	"log"
 	"os"
 
+	"github.com/kajiLabTeam/walking-information-storage-server-api/app/infrastructure/repository"
 	_ "github.com/lib/pq"
 )
+
+// trajectories  テーブルのデータ構造体
+type Trajectories struct {
+	ID string `db:"id"`
+}
 
 func ConnectionDB() (*sql.DB, error) {
 
@@ -18,30 +24,47 @@ func ConnectionDB() (*sql.DB, error) {
 	user := os.Getenv("DB_USER")
 	password := os.Getenv("DB_PASSWORD")
 
-	// fmt.Println(host)
-	// fmt.Println(port)
-	// fmt.Println(name)
-	// fmt.Println(user)
-	fmt.Println(password)
-
+	// PostgreSQL 接続文字列の作成
 	connStr := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable host=%s port=%s", user, password, name, host, port)
 	fmt.Println(connStr)
 
 	//データベースと接続
 	db, err := sql.Open("postgres", connStr)
-
 	if err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("データベース接続エラー: %w", err)
 	}
-	//defer:処理が完了次に実行
-	defer db.Close()
 
-	//ピンを飛ばす
-	err = db.Ping()
-	if err != nil {
-		return nil, err
+	// 接続確認(Pingを飛ばす)
+	if err := db.Ping(); err != nil {
+		return nil, fmt.Errorf("データベースの応答なし: %w", err)
 	}
-	fmt.Println("DB接続")
+	fmt.Println("DB接続成功")
+
+	//floor_id(フロアID)を元に軌跡ID(trajectry_id)を取得
+	trajectoryID, err := repository.GetTrajectoryIDByFloorID(db, "01F8VYXK67BGC1F9RP1E4S9YTV")
+	if err != nil {
+		return nil, fmt.Errorf("軌跡IDの取得エラー: %w", err)
+	}
+
+	//軌跡ID(trajectry_id)に紐付いた推定座標(estimated_positions)/正解座標(correct_positions)を取得
+	estimatedPositions, err := repository.GetEstimatedPositionsByTrajectoryID(db, trajectoryID)
+	if err != nil {
+		return nil, fmt.Errorf("推定座標の取得エラー: %w", err)
+	}
+
+	correctPositions, err := repository.GetCorrectPositionsByTrajectoryID(db, trajectoryID)
+	if err != nil {
+		return nil, fmt.Errorf("正解座標の取得エラー: %w", err)
+	}
+
+	//表示
+	fmt.Println(estimatedPositions)
+	fmt.Println(correctPositions)
+
+	if err := db.Close(); err != nil {
+		log.Printf("データベースのクローズに失敗: %v", err)
+	}
+
 	return db, nil
 
 }
