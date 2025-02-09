@@ -8,29 +8,29 @@ import (
 )
 
 // Trajectories  テーブルのデータ構造体
-type Trajectories struct {
+
+type Trajectory struct {
 	ID string `db:"id"`
 }
 
-func GetTrajectoryIDByFloorID(db *sql.DB, id string) (Trajectories, error) {
+func GetTrajectoryIDByFloorID(db *sql.DB, floor_id string) (Trajectory, error) {
 
 	// EstimatedPositionsテーブルの id,x,y,created_at,trajectory_idのデータ取得
 	rows, err := db.Query("SELECT id  FROM trajectories WHERE floor_id = '01F8VYXK67BGC1F9RP1E4S9YTV'")
 	if err != nil {
-		return Trajectories{}, fmt.Errorf("クエリ実行エラー %w", err)
+		return Trajectory{}, fmt.Errorf("クエリ実行エラー %w", err)
 	}
 	defer rows.Close()
 
-	var trajectory Trajectories
+	var trajectory Trajectory
 	// データ取得と出力
 	for rows.Next() {
-
 		if err := rows.Scan(&trajectory.ID); err != nil {
-			return Trajectories{}, fmt.Errorf("データスキャンエラー: %w", err)
+			return Trajectory{}, fmt.Errorf("データスキャンエラー: %w", err)
 		}
 
 	}
 
-	return Trajectories{ID: trajectory.ID}, nil
+	return Trajectory{ID: trajectory.ID}, nil
 
 }
