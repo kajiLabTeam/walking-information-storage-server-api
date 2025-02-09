@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/kajiLabTeam/walking-information-storage-server-api/app/infrastructure/repository"
 	_ "github.com/lib/pq"
 )
 
@@ -38,30 +39,12 @@ func ConnectionDB() (*sql.DB, error) {
 		return nil, fmt.Errorf("データベースの応答なし: %w", err)
 	}
 	fmt.Println("DB接続成功")
-
-	// trajectories テーブルのtrajectoriesID のデータ取得
-	rows, err := db.Query("SELECT id  FROM trajectories WHERE floor_id = '01F8VYXK67BGC1F9RP1E4S9YTV'")
-
-	if err != nil {
-		return nil, fmt.Errorf("クエリ実行エラー %w", err)
-	}
-	defer rows.Close()
-
-	// データ取得と出力
-	for rows.Next() {
-
-		var trajectory Trajectories
-		if err := rows.Scan(&trajectory.ID); err != nil {
-			return nil, fmt.Errorf("データスキャンエラー: %w", err)
-		}
-
-		fmt.Printf("trajectoryID: %s\n", trajectory.ID)
-	}
-	fmt.Println(rows)
+	repository.GetEstimationPositionByTrajectoryID(db, "01JET1DV4WJ2EP78B8HAKK5SP0")
 
 	if err := db.Close(); err != nil {
 		log.Printf("データベースのクローズに失敗: %v", err)
 	}
+
 	return db, nil
 
 }
