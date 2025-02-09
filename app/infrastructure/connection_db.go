@@ -44,9 +44,6 @@ func ConnectionDB() (*sql.DB, error) {
 	if err != nil {
 		return nil, fmt.Errorf("軌跡IDの取得エラー: %w", err)
 	}
-	fmt.Println("trajectory.ID")
-
-	fmt.Println(trajectory.ID)
 
 	//軌跡ID(trajectry_id)に紐付いた推定座標(estimated_positions)/正解座標(correct_positions)を取得
 	estimatedPositions, err := repository.GetEstimatedPositionsByTrajectoryID(db, trajectory.ID)
