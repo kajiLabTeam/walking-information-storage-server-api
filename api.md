@@ -156,6 +156,7 @@
 
 ## メモ
 
+image/ER.png
 ### `pedestrians`
 - 軌跡蓄積システムを使う歩行者
 ### `trajectories`
