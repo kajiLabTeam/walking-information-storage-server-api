@@ -155,8 +155,9 @@
 正解軌跡を空[]で返す
 
 ## メモ
+<img width="1057" alt="ER図_addメモ.png (99.8 kB)" src="https://img.esa.io/uploads/production/attachments/13979/2025/02/10/168726/b056b031-731d-4a5b-a3fb-0799e13a8d83.png">
 
-image/ER.png
+<img width="677" alt="image.png (37.8 kB)" src="/image/ER.png">
 ### `pedestrians`
 - 軌跡蓄積システムを使う歩行者
 ### `trajectories`
