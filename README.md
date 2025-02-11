@@ -9,7 +9,7 @@
 
 [api設計](https://github.com/kajiLabTeam/walking-information-storage-server-api/blob/dev/docs/api.md)
 
-[todo](https://github.com/kajiLabTeam/walking-informtion-storage-server-api/blob/dev/docs/Todo.md)
+[todo](https://github.com/kajiLabTeam/walking-information-storage-server-api/blob/dev/docs/Todo.md)
 
 [ディレクトリ構成](https://github.com/kajiLabTeam/walking-information-storage-server-api/blob/dev/docs/directory.md)
 
