@@ -21,4 +21,14 @@ make db
 ### コンテナのログを見る
 ```
 make logs
+
 ```
+
+## ドキュメント
+
+[研究概要](https://github.com/kajiLabTeam/walking-information-storage-server-api/blob/dev/docs/research_outline.md)
+
+
+[api設計](https://github.com/kajiLabTeam/walking-information-storage-server-api/blob/dev/docs/api.md)
+
+[todo](https://github.com/kajiLabTeam/walking-information-storage-server-api/blob/dev/docs/Todo.md)
