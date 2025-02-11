@@ -3,8 +3,11 @@
 up:
 	docker compose build && docker compose up -d
 
+logs:
+	docker compose logs -f
+
 reup:
-	rm -rf ./docker/postgres/data && docker compose build && docker compose up -d
+	rm -rf ./docker/db/data && docker compose build && docker compose up -d && docker compose logs -f
 
 logs:
 	docker compose logs -f

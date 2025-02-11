@@ -1,14 +1,25 @@
 services:
-  postgres:
-    container_name: postgres
+  db:
+    container_name: ${DB_HOST}
     build: 
       context: .
-      dockerfile: ./docker/postgres/Dockerfile
+      dockerfile: ./docker/db/Dockerfile
     volumes:
-      - ./docker/postgres/data:/var/lib/postgresql/data
+      - ./docker/db/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+  server:
+    container_name: ${SERVER_HOST}
+    build:
+      context: .
+      dockerfile: ./docker/server/Dockerfile
+    volumes:
+      - .:/app
+    stdin_open: true
+    ports:
+      - 8080:8080

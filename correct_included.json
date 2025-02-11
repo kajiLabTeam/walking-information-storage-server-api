@@ -1,0 +1,67 @@
+{
+	"floor_map_image": "gsgsgfs12144",
+	"estimation_trajectories": [
+		{
+			"estimation_trajectories_id": 123,
+			"estimation_position": [
+				{
+					"id": 1,
+					"x": 32.4455,
+					"y": 153.34555
+				},
+				{
+					"id": 1,
+					"x": 32.4455,
+					"y": 153.34555
+				}
+			]
+		},
+		{
+			"estimation_trajectories_id": 234,
+			"estimation_position": [
+				{
+					"id": 1,
+					"x": 32.4455,
+					"y": 153.34555
+				},
+				{
+					"id": 1,
+					"x": 32.4455,
+					"y": 153.34555
+				}
+			]
+		}
+	],
+	"correct_trajectories": [
+		{
+			"correct_trajectories_id": 123,
+			"correct_position": [
+				{
+					"id": 1,
+					"x": 32.4455,
+					"y": 153.34555
+				},
+				{
+					"id": 1,
+					"x": 32.4455,
+					"y": 153.34555
+				}
+			]
+		},
+		{
+			"correct_trajectories_id": 123,
+			"correct_position": [
+				{
+					"id": 1,
+					"x": 32.4455,
+					"y": 153.34555
+				},
+				{
+					"id": 1,
+					"x": 32.4455,
+					"y": 153.34555
+				}
+			]
+		}
+	]
+}
