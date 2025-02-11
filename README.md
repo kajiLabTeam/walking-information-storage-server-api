@@ -30,6 +30,12 @@ make db
 make logs
 
 ```
+## 実行方法
+devコンテナにログイン後、以下を実行してください
+
+```
+go run main.go
+```
 
 
 
