@@ -10,11 +10,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// trajectories  テーブルのデータ構造体
-type Trajectories struct {
-	ID string `db:"id"`
-}
-
 func ConnectionDB() (*sql.DB, error) {
 
 	//環境変数の読み込み
@@ -44,21 +39,22 @@ func ConnectionDB() (*sql.DB, error) {
 	if err != nil {
 		return nil, fmt.Errorf("軌跡IDの取得エラー: %w", err)
 	}
+	fmt.Println("trajectory")
+	fmt.Println(trajectory)
+	// //軌跡ID(trajectry_id)に紐付いた推定座標(estimated_positions)/正解座標(correct_positions)を取得
+	// estimatedPositions, err := repository.GetEstimatedPositionsByTrajectoryID(db, trajectory.ID)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("推定座標の取得エラー: %w", err)
+	// }
 
-	//軌跡ID(trajectry_id)に紐付いた推定座標(estimated_positions)/正解座標(correct_positions)を取得
-	estimatedPositions, err := repository.GetEstimatedPositionsByTrajectoryID(db, trajectory.ID)
-	if err != nil {
-		return nil, fmt.Errorf("推定座標の取得エラー: %w", err)
-	}
-
-	correctPositions, err := repository.GetCorrectPositionsByTrajectoryID(db, trajectory.ID)
-	if err != nil {
-		return nil, fmt.Errorf("正解座標の取得エラー: %w", err)
-	}
+	// correctPositions, err := repository.GetCorrectPositionsByTrajectoryID(db, trajectory.ID)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("正解座標の取得エラー: %w", err)
+	// }
 
 	//表示
-	fmt.Println(estimatedPositions)
-	fmt.Println(correctPositions)
+	// fmt.Println(estimatedPositions)
+	// fmt.Println(correctPositions)
 
 	if err := db.Close(); err != nil {
 		log.Printf("データベースのクローズに失敗: %v", err)
