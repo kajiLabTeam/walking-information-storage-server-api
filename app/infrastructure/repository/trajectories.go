@@ -13,7 +13,7 @@ type Trajectories struct {
 	ID string `db:"id"`
 }
 
-func GetTrajectoryIDByFloorID(db *sql.DB, floorID string) ([]*Trajectories, error) {
+func GetTrajectoryIDByFloorID(db *sql.DB, floorID string) (*Trajectories, error) {
 
 	// EstimatedPositionsテーブルの id,x,y,created_at,trajectory_idのデータ取得
 	//SQLクエリ
@@ -24,23 +24,13 @@ func GetTrajectoryIDByFloorID(db *sql.DB, floorID string) ([]*Trajectories, erro
 	}
 	defer rows.Close()
 
-	var trajectories []*Trajectories
-
-	// データ取得とスライスへの格納
-	for rows.Next() {
-		var t Trajectories
-		if err := rows.Scan(&t.ID); err != nil {
-			return nil, fmt.Errorf("データスキャンエラー: %w", err)
-		}
-		trajectories = append(trajectories, &t)
-	}
-	fmt.Println(trajectories)
+	var trajectories Trajectories
 
 	// ループ中のエラー確認
 	if err := rows.Err(); err != nil {
 		return nil, fmt.Errorf("行の取得エラー: %w", err)
 	}
 
-	return trajectories, nil
+	return &trajectories, nil
 
 }
