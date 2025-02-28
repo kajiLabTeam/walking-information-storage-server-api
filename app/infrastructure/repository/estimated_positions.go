@@ -37,5 +37,4 @@ func GetEstimatedPositionsByTrajectoryID(db *sql.DB, trajectoryID string) (*Esti
 	}
 
 	return &EstimatedPosition{ID: estimatedPosition.ID, X: estimatedPosition.X, Y: estimatedPosition.Y, CreatedAt: estimatedPosition.CreatedAt, TrajectoryID: estimatedPosition.TrajectoryID}, nil
-
 }

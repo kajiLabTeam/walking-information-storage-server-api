@@ -31,6 +31,6 @@ func GetTrajectoryIDByFloorID(db *sql.DB, floorID string) (*Trajectories, error)
 		return nil, fmt.Errorf("行の取得エラー: %w", err)
 	}
 
-	return &trajectories, nil
+	return &Trajectories{ID: trajectories.ID}, nil
 
 }
