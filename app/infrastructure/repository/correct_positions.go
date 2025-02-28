@@ -16,8 +16,7 @@ type CorrectPosition struct {
 	TrajectoryID string `db:"trajectory_id"`
 }
 
-func GetCorrectPositionsByTrajectoryID(db *sql.DB, trajectoryID string) (*CorrectPosition, error) {
-	var correctPosition CorrectPosition
+func GetCorrectPositionsByTrajectoryID(db *sql.DB, trajectoryID string) ([]CorrectPosition, error) {
 	// correct_positions id,x,y,created_at,trajectory_idのデータ取得
 	rows, err := db.Query("SELECT id,x,y,created_at,trajectory_id FROM correct_positions WHERE trajectory_id = '01JET1DV4WJ2EP78B8HAKK5SP0'")
 	if err != nil {
@@ -25,14 +24,16 @@ func GetCorrectPositionsByTrajectoryID(db *sql.DB, trajectoryID string) (*Correc
 	}
 	defer rows.Close()
 
-	// データ取得と出力
+	// 結果をスライスに格納
+	var correctPositions []CorrectPosition
 	for rows.Next() {
-
+		var correctPosition CorrectPosition
 		if err := rows.Scan(&correctPosition.ID, &correctPosition.X, &correctPosition.Y, &correctPosition.CreatedAt, &correctPosition.TrajectoryID); err != nil {
 			return nil, fmt.Errorf("データスキャンエラー: %w", err)
 		}
+		correctPositions = append(correctPositions, correctPosition)
 	}
 
-	return &CorrectPosition{ID: correctPosition.ID, X: correctPosition.X, Y: correctPosition.Y, CreatedAt: correctPosition.CreatedAt, TrajectoryID: correctPosition.TrajectoryID}, nil
+	return correctPositions, nil
 
 }
