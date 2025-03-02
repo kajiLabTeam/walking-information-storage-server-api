@@ -34,11 +34,11 @@ func GetTrajectoriesService(trajectoryID string) (*controllers.GetTrajectoriesRe
 		log.Printf("正解軌跡の取得エラー: %w", err)
 	}
 
-	// 表示
-	fmt.Println("estimatedPositions")
-	fmt.Printf("%+v\n", estimatedPositions)
-	fmt.Println("correctPositions")
-	fmt.Printf("%+v\n", correctPositions)
+	// // 表示
+	// fmt.Println("estimatedPositions")
+	// fmt.Printf("%+v\n", estimatedPositions)
+	// fmt.Println("correctPositions")
+	// fmt.Printf("%+v\n", correctPositions)
 
 	// 推定座標(estimatedPositions)を配列にして、推定軌跡(estimatedTrajectories)に変形
 	estimated := []controllers.Position{}
@@ -55,6 +55,35 @@ func GetTrajectoriesService(trajectoryID string) (*controllers.GetTrajectoriesRe
 		estimated = append(estimated, position)
 		fmt.Printf("estimated: %v\n", estimated)
 	}
+	// 推定座標(estimatedPositions)を配列にして、推定軌跡(estimatedTrajectories)に変形
+	correct := []controllers.Position{}
+
+	//推定座標estimatedPositionをPosition型に変更する
+	for _, correctPosition := range correctPositions {
+		position := controllers.Position{
+			ID:       correctPosition.ID,
+			X:        float32(correctPosition.X),
+			Y:        float32(correctPosition.Y),
+			WalkedAt: correctPosition.CreatedAt,
+		}
+
+		correct = append(correct, position)
+		fmt.Printf("correct: %v\n", correct)
+	}
+
+	trajectory := []controllers.Trajectory{}
+
+	//推定座標estimatedPositionをPosition型に変更する
+	for _, trajectory := range trajectory {
+		trajectoryID := controllers.Trajectory{
+			ID:        trajectoryID,
+			Estimated: estimated,
+			Correct:   correct,
+		}
+
+		correct = append(correct, position)
+		fmt.Printf("correct: %v\n", correct)
+	}
 
 	//正解座標(CorrectPositions)を配列にして、正解軌跡(CorrectTrajectories)にする
 
@@ -62,7 +91,5 @@ func GetTrajectoriesService(trajectoryID string) (*controllers.GetTrajectoriesRe
 		log.Printf("データベースのクローズに失敗: %v", err)
 	}
 
-	//ここどうしよ
-	// application.EstimatedPositionEncoding(estimatedPosition)
 	return &controllers.GetTrajectoriesResponse{}, nil
 }

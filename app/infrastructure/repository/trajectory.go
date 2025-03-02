@@ -9,11 +9,11 @@ import (
 
 // Trajectories  テーブルのデータ構造体
 
-type Trajectories struct {
+type Trajectory struct {
 	ID string `db:"id"`
 }
 
-func GetTrajectoryIDByFloorID(db *sql.DB, floorID string) (*Trajectories, error) {
+func GetTrajectoryIDByFloorID(db *sql.DB, floorID string) (*Trajectory, error) {
 
 	// EstimatedPositionsテーブルの id,x,y,created_at,trajectory_idのデータ取得
 	//SQLクエリ
@@ -24,13 +24,13 @@ func GetTrajectoryIDByFloorID(db *sql.DB, floorID string) (*Trajectories, error)
 	}
 	defer rows.Close()
 
-	var trajectories Trajectories
+	var trajectories Trajectory
 
 	// ループ中のエラー確認
 	if err := rows.Err(); err != nil {
 		return nil, fmt.Errorf("行の取得エラー: %w", err)
 	}
 
-	return &Trajectories{ID: trajectories.ID}, nil
+	return &Trajectory{ID: trajectories.ID}, nil
 
 }
