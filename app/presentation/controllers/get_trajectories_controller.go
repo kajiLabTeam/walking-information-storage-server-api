@@ -17,10 +17,10 @@ type GetTrajectoriesResponse struct {
 }
 
 type Position struct {
-	ID       int     `json:"id"`
+	ID       string  `json:"id"`
 	X        float32 `json:"x"`
 	Y        float32 `json:"y"`
-	WalkedAt int     `json:"walked_at"`
+	WalkedAt string  `json:"walked_at"`
 }
 
 type Trajectory struct {
@@ -60,23 +60,23 @@ func GetTrajectoriesController(r *gin.Engine) {
 				{
 					ID: "1",
 					Estimated: []Position{
-						{ID: 1, X: 36.1834166, Y: 138.110467, WalkedAt: 1560000000},
-						{ID: 2, X: 35.1834166, Y: 137.110467, WalkedAt: 1560000000},
+						{ID: "1", X: 36.1834166, Y: 138.110467, WalkedAt: "1560000000"},
+						{ID: "2", X: 35.1834166, Y: 137.110467, WalkedAt: "1560000000"},
 					},
 					Correct: []Position{
-						{ID: 1, X: 30.1834166, Y: 137.110467, WalkedAt: 1560000000},
-						{ID: 2, X: 31.1834166, Y: 137.110467, WalkedAt: 1560000000},
+						{ID: "1", X: 30.1834166, Y: 137.110467, WalkedAt: "1560000000"},
+						{ID: "2", X: 31.1834166, Y: 137.110467, WalkedAt: "1560000000"},
 					},
 				},
 				{
 					ID: "2",
 					Estimated: []Position{
-						{ID: 1, X: 36.1834166, Y: 138.110467, WalkedAt: 1560000000},
-						{ID: 2, X: 35.1834166, Y: 137.110467, WalkedAt: 1560000000},
+						{ID: "1", X: 36.1834166, Y: 138.110467, WalkedAt: "1560000000"},
+						{ID: "2", X: 35.1834166, Y: 137.110467, WalkedAt: "1560000000"},
 					},
 					Correct: []Position{
-						{ID: 1, X: 30.1834166, Y: 137.110467, WalkedAt: 1560000000},
-						{ID: 2, X: 31.1834166, Y: 137.110467, WalkedAt: 1560000000},
+						{ID: "1", X: 30.1834166, Y: 137.110467, WalkedAt: "1560000000"},
+						{ID: "2", X: 31.1834166, Y: 137.110467, WalkedAt: "1560000000"},
 					},
 				},
 			},

@@ -24,7 +24,7 @@ func GetTrajectoriesService(trajectoryID string) (*controllers.GetTrajectoriesRe
 	fmt.Println("trajectory")
 	fmt.Println(trajectory)
 	//軌跡ID(trajectry_id)に紐付いた推定座標(estimated_positions)/正解座標(correct_positions)を取得
-	estimatedPosition, err := repository.GetEstimatedPositionsByTrajectoryID(db, trajectory.ID)
+	estimatedPositions, err := repository.GetEstimatedPositionsByTrajectoryID(db, trajectory.ID)
 	if err != nil {
 		log.Printf("推定軌跡の取得エラー: %w", err)
 	}
@@ -34,14 +34,27 @@ func GetTrajectoriesService(trajectoryID string) (*controllers.GetTrajectoriesRe
 		log.Printf("正解軌跡の取得エラー: %w", err)
 	}
 
-	//表示
+	// 表示
 	fmt.Println("estimatedPositions")
-	fmt.Printf("%+v\n", estimatedPosition)
+	fmt.Printf("%+v\n", estimatedPositions)
 	fmt.Println("correctPositions")
 	fmt.Printf("%+v\n", correctPositions)
 
-	//推定座標(estimatedPositions)を配列にして、推定軌跡(estimatedTrajectories)に変形
-	positions := []controllers.Position{}
+	// 推定座標(estimatedPositions)を配列にして、推定軌跡(estimatedTrajectories)に変形
+	estimated := []controllers.Position{}
+
+	//推定座標estimatedPositionをPosition型に変更する
+	for _, estimatedPosition := range estimatedPositions {
+		position := controllers.Position{
+			ID:       estimatedPosition.ID,
+			X:        float32(estimatedPosition.X),
+			Y:        float32(estimatedPosition.Y),
+			WalkedAt: estimatedPosition.CreatedAt,
+		}
+
+		estimated = append(estimated, position)
+		fmt.Printf("estimated: %v\n", estimated)
+	}
 
 	//正解座標(CorrectPositions)を配列にして、正解軌跡(CorrectTrajectories)にする
 
@@ -51,5 +64,5 @@ func GetTrajectoriesService(trajectoryID string) (*controllers.GetTrajectoriesRe
 
 	//ここどうしよ
 	// application.EstimatedPositionEncoding(estimatedPosition)
-
+	return &controllers.GetTrajectoriesResponse{}, nil
 }
