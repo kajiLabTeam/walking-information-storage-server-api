@@ -23,3 +23,9 @@ services:
     stdin_open: true
     ports:
       - 8080:8080
+    networks:
+      - walking-trajectory-storage-network
+
+networks:
+  walking-trajectory-storage-network:
+    external: true
