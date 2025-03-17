@@ -5,7 +5,8 @@ import (
 	"github.com/joho/godotenv"
 
 	//"github.com/kajiLabTeam/walking-information-storage-server-api/app/infrastructure"
-	"github.com/kajiLabTeam/walking-information-storage-server-api/app/infrastructure"
+
+	"github.com/kajiLabTeam/walking-information-storage-server-api/app/application/services"
 	"github.com/kajiLabTeam/walking-information-storage-server-api/app/presentation/controllers"
 )
 
@@ -17,8 +18,7 @@ func main() {
 	}
 
 	r := gin.Default()
-
-	infrastructure.ConnectionDB()
+	services.GetTrajectoriesService("01F8VYXK67BGC1F9RP1E4S9YTV")
 
 	// 以下にコントローラーを追加
 	controllers.HealthCheckController(r)
