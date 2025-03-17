@@ -51,7 +51,7 @@ func GetTrajectoriesService(floorID string) (*dto_presentation.GetTrajectoriesRe
 			}
 
 			estimated = append(estimated, position)
-			// fmt.Printf("estimated: %v\n", estimated)
+
 		}
 		//推定座標estimatedPositionをPosition型に変更する
 		for _, correctPosition := range correctPositions {
@@ -63,7 +63,7 @@ func GetTrajectoriesService(floorID string) (*dto_presentation.GetTrajectoriesRe
 			}
 
 			correct = append(correct, position)
-			// fmt.Printf("correct: %v\n", correct)
+
 		}
 
 		resTrajectory := dto_presentation.Trajectory{
@@ -73,10 +73,9 @@ func GetTrajectoriesService(floorID string) (*dto_presentation.GetTrajectoriesRe
 		}
 
 		resTrajectories = append(resTrajectories, resTrajectory)
-		// fmt.Printf("resTrajectories: %v\n", resTrajectories)
+
 	}
 
-	//正解座標(CorrectPositions)を配列にして、正解軌跡(CorrectTrajectories)にする
 	floor := dto_presentation.Floor{
 		ID:          "1",
 		MapImageURL: "署名付きURL",

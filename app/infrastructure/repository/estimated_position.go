@@ -18,8 +18,6 @@ type EstimatedPosition struct {
 
 func GetEstimatedPositionsByTrajectoryID(db *sql.DB, trajectoryID string) ([]EstimatedPosition, error) {
 
-	// EstimatedPositionsテーブルの id,x,y,created_at,trajectory_idのデータ取得
-
 	query := "SELECT id,x,y,created_at,trajectory_id FROM estimated_positions WHERE trajectory_id = $1"
 
 	rows, err := db.Query(query, trajectoryID)
@@ -29,7 +27,6 @@ func GetEstimatedPositionsByTrajectoryID(db *sql.DB, trajectoryID string) ([]Est
 	}
 	defer rows.Close()
 
-	// 結果をスライスに格納
 	var estimatedPositions []EstimatedPosition
 	for rows.Next() {
 		var estimatedPosition EstimatedPosition
