@@ -33,37 +33,7 @@ func GetTrajectoriesController(r *gin.Engine) {
 		if err != nil {
 			return
 		}
-		//GetTrajectoriesResponse{
-		// 	Floor: Floor{
-		// 		ID:          "1",
-		// 		MapImageURL: "署名付きURL",
-		// 	},
-		// 	Trajectories: []Trajectory{
-		// 		{
-		// 			ID: "1",
-		// 			Estimated: []Position{
-		// 				{ID: "1", X: 36.1834166, Y: 138.110467, WalkedAt: "1560000000"},
-		// 				{ID: "2", X: 35.1834166, Y: 137.110467, WalkedAt: "1560000000"},
-		// 			},
-		// 			Correct: []Position{
-		// 				{ID: "1", X: 30.1834166, Y: 137.110467, WalkedAt: "1560000000"},
-		// 				{ID: "2", X: 31.1834166, Y: 137.110467, WalkedAt: "1560000000"},
-		// 			},
-		// 		},
-		// 		{
-		// 			ID: "2",
-		// 			Estimated: []Position{
-		// 				{ID: "1", X: 36.1834166, Y: 138.110467, WalkedAt: "1560000000"},
-		// 				{ID: "2", X: 35.1834166, Y: 137.110467, WalkedAt: "1560000000"},
-		// 			},
-		// 			Correct: []Position{
-		// 				{ID: "1", X: 30.1834166, Y: 137.110467, WalkedAt: "1560000000"},
-		// 				{ID: "2", X: 31.1834166, Y: 137.110467, WalkedAt: "1560000000"},
-		// 			},
-		// 		},
-		// 	},
-		// }
-		c.JSON(200, res)
 
+		c.JSON(200, res)
 	})
 }
