@@ -18,7 +18,10 @@ type CorrectPosition struct {
 
 func GetCorrectPositionsByTrajectoryID(db *sql.DB, trajectoryID string) ([]CorrectPosition, error) {
 	// correct_positions id,x,y,created_at,trajectory_idのデータ取得
-	rows, err := db.Query("SELECT id,x,y,created_at,trajectory_id FROM correct_positions WHERE trajectory_id = '01JET1DV4WJ2EP78B8HAKK5SP0'")
+
+	query := "SELECT id,x,y,created_at,trajectory_id FROM correct_positions WHERE trajectory_id = $1"
+	rows, err := db.Query(query, trajectoryID)
+
 	if err != nil {
 		return nil, fmt.Errorf("クエリ実行エラー %w", err)
 	}
