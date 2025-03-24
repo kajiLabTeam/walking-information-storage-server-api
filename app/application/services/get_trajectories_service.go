@@ -76,13 +76,20 @@ func GetTrajectoriesService(floorID string) (*dto_presentation.GetTrajectoriesRe
 
 	}
 
-	floor := dto_presentation.Floor{
+	//Todo: repositoryのfloor_information関数からフロア情報IDを取得
+	floor, err := repository.GetFloorInformationIDByfloorID(db, floorID)
+	if err != nil {
+		log.Printf("フロア情報IDの取得エラー: %w", err)
+	}
+
+	resFloor := dto_presentation.Floor{
 		ID:          "1",
 		MapImageURL: "署名付きURL",
 	}
+	fmt.Println("floor:%w", floor)
 
 	trajectoriesResponse := dto_presentation.GetTrajectoriesResponse{
-		Floor:        floor,
+		Floor:        resFloor,
 		Trajectories: resTrajectories,
 	}
 
