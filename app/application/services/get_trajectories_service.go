@@ -86,7 +86,9 @@ func GetTrajectoriesService(floorID string) (*dto_presentation.GetTrajectoriesRe
 		ID:          "1",
 		MapImageURL: "署名付きURL",
 	}
-	fmt.Println("floor:%w", floor)
+
+	fmt.Println("floor")
+	fmt.Println(floor)
 
 	trajectoriesResponse := dto_presentation.GetTrajectoriesResponse{
 		Floor:        resFloor,
