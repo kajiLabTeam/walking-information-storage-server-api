@@ -81,9 +81,12 @@ func GetTrajectoriesService(floorID string) (*dto_presentation.GetTrajectoriesRe
 	if err != nil {
 		log.Printf("フロア情報IDの取得エラー: %w", err)
 	}
+	fmt.Println("GetFloorInformationIDByfloorID", floor.ID)
+
+	// Todo : フロア情報IDからフロアマップ画像を取得
 
 	resFloor := dto_presentation.Floor{
-		ID:          "1",
+		ID:          floorID,
 		MapImageURL: "署名付きURL",
 	}
 
