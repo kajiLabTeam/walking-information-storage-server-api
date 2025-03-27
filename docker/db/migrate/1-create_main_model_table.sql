@@ -26,6 +26,8 @@ CREATE TABLE floors (
 CREATE TABLE floor_information (
     id VARCHAR(26) PRIMARY KEY
     , created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    , updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    , deleted_at TIMESTAMP WITH TIME ZONE
     , floor_id VARCHAR(26) REFERENCES floors (id)
 );
 
@@ -39,6 +41,8 @@ CREATE TABLE pedestrians (
 CREATE TABLE walking_information (
     id VARCHAR(26) PRIMARY KEY
     , created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    , updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    , deleted_at TIMESTAMP WITH TIME ZONE
     , pedestrian_id VARCHAR(26) REFERENCES pedestrians (id)
 );
 
@@ -46,6 +50,8 @@ CREATE TABLE trajectories (
     id VARCHAR(26) PRIMARY KEY
     , is_walking BOOLEAN NOT NULL
     , created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    , updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    , deleted_at TIMESTAMP WITH TIME ZONE
     , pedestrian_id VARCHAR(26) REFERENCES pedestrians (id)
     , floor_id VARCHAR(26) REFERENCES floors (id)
 );
@@ -56,5 +62,7 @@ CREATE TABLE correct_positions (
     , y INTEGER NOT NULL
     , direction INTEGER NOT NULL
     , created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    , updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    , deleted_at TIMESTAMP WITH TIME ZONE
     , trajectory_id VARCHAR(26) REFERENCES trajectories (id)
 );

@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/kajiLabTeam/walking-information-storage-server-api/app/infrastructure"
+	"github.com/kajiLabTeam/walking-information-storage-server-api/app/infrastructure/external/services"
 	"github.com/kajiLabTeam/walking-information-storage-server-api/app/infrastructure/repository"
 	dto_presentation "github.com/kajiLabTeam/walking-information-storage-server-api/app/presentation/dto"
 )
@@ -15,6 +16,11 @@ func GetTrajectoriesService(floorID string) (*dto_presentation.GetTrajectoriesRe
 		log.Fatal("データベース接続エラー:", err)
 	}
 	defer db.Close() // 呼び出し側で DB を閉じる
+
+	session, err := infrastructure.ConnectionMinio()
+	if err != nil {
+		log.Fatal("Minio接続エラー:", err)
+	}
 
 	//floor_id(フロアID)を元に軌跡ID(trajectry_id)を取得
 	trajectories, err := repository.GetTrajectoriesIDByFloorID(db, floorID)
@@ -76,13 +82,27 @@ func GetTrajectoriesService(floorID string) (*dto_presentation.GetTrajectoriesRe
 
 	}
 
-	floor := dto_presentation.Floor{
-		ID:          "1",
-		MapImageURL: "署名付きURL",
+	//Todo: repositoryのfloor_information関数からフロア情報IDを取得
+	floorInformationRecord, err := repository.GetFloorInformationIDByfloorID(db, floorID)
+	if err != nil {
+		log.Printf("フロア情報IDの取得エラー: %w", err)
+	}
+	fmt.Println("GetFloorInformationIDByfloorID", floorInformationRecord.ID)
+
+	// Todo : フロア情報IDからフロアマップ画像を取得
+
+	floorMap, err := services.Download(session, floorID, floorInformationRecord.ID)
+	if err != nil {
+		log.Printf("フロアマップ署名付きURLの取得エラー: %w", err)
+	}
+	resFloor := dto_presentation.Floor{
+		ID:          floorID,
+		MapImageURL: floorMap,
 	}
 
+	fmt.Println("Download", floorMap)
 	trajectoriesResponse := dto_presentation.GetTrajectoriesResponse{
-		Floor:        floor,
+		Floor:        resFloor,
 		Trajectories: resTrajectories,
 	}
 
