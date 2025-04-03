@@ -100,7 +100,6 @@ func GetTrajectoriesService(floorID string) (*dto_presentation.GetTrajectoriesRe
 		MapImageURL: floorMap,
 	}
 
-	fmt.Println("Download", floorMap)
 	trajectoriesResponse := dto_presentation.GetTrajectoriesResponse{
 		Floor:        resFloor,
 		Trajectories: resTrajectories,
