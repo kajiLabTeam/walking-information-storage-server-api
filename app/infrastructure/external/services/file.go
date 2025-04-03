@@ -14,18 +14,6 @@ func Download(session *session.Session, floorID string, floorInformationID strin
 
 	svc := s3.New(session)
 
-	// fmt.Println(svc)
-
-	// // バケット一覧出力
-	// fmt.Println("バケット")
-	// result, err := svc.ListBuckets(nil)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// for _, bucket := range result.Buckets {
-	// 	fmt.Printf("%s\n", aws.StringValue(bucket.Name))
-	// }
-
 	// 署名付きURLを作成するキー
 	key := fmt.Sprintf("floors/%s/floor-information/%s/floor-map.png", floorID, floorInformationID)
 
