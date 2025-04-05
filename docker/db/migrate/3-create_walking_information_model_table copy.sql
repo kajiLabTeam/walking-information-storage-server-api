@@ -9,6 +9,8 @@ CREATE TABLE estimated_positions (
     , is_converged BOOLEAN NOT NULL
     , direction INTEGER NOT NULL
     , created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    , updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    , deleted_at TIMESTAMP WITH TIME ZONE
     , trajectory_id VARCHAR(26) REFERENCES trajectories (id)
     , walking_information_id VARCHAR(26) REFERENCES walking_information (id)
 );
