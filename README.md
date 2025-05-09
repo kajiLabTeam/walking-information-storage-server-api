@@ -59,3 +59,14 @@ make db
 ```
 make logs
 ```
+
+### 4.URL
+trajectoryID(軌跡ID)に取得したい軌跡IDを入力してください。
+※building_id (建物ID)は固定値です
+```
+https://walking-trajectory-storage-system-read-server.kajilab.dev/api/buildings/&{building_id}/floors/${trajectoryID}/trajectories/
+```
+
+例
+ ```
+ https://walking-trajectory-storage-system-read-server.kajilab.dev/api/buildings/:building_id/floors/01F8VYXK67BGC1F9RP1E4S9YTV/trajectories/
